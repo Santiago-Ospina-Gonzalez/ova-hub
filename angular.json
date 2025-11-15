@@ -47,6 +47,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "ucevalogo.png",
+                "input": "src/app/icons",
+                "output": "/"
               }
             ],
             "styles": [
@@ -104,6 +109,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "ucevalogo.png",
+                "input": "src/app/icons",
+                "output": "/"
               }
             ],
             "styles": [

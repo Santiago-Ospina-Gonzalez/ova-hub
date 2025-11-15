@@ -5,8 +5,8 @@
 	margin: 20px auto;
 }
 .login-card {
-	background: rgba(255, 255, 255, 0.95);
-	backdrop-filter: blur(8px);
+	background: rgba(255, 255, 255, 0.75);
+	backdrop-filter: blur(12px);
 	border-radius: 12px;
 	padding: 28px;
 	box-shadow: 0 10px 30px rgba(20,20,40,0.08);
@@ -16,10 +16,13 @@
 	text-align: center;
 	margin-bottom: 24px;
 }
-.login-header .brand-logo {
+.login-header .login-logo {
 	margin: 0 auto 12px;
-	width: 64px;
-	height: 64px;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .login-header h1 {
 	font-size: 1.5rem;
@@ -61,4 +64,59 @@
 	color: #6b7280;
 	position: relative;
 	font-size: 0.9rem;
+}
+
+/* Animaciones */
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+@keyframes popIn { from { transform:scale(.95); opacity:0 } to { transform:scale(1); opacity:1 } }
+@keyframes slideUp { from { transform:translateY(25px); opacity:0 } to { transform:translateY(0); opacity:1 } }
+@keyframes bgZoom { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+.login-container { animation: fadeIn .8s ease forwards; }
+.login-card { 
+	animation: popIn .7s ease forwards; 
+	transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.login-card.flipping {
+	animation: flipCard .5s ease-in-out;
+}
+@keyframes flipCard {
+	0% { transform: scale(1); opacity: 1; }
+	50% { transform: scale(0.9); opacity: 0; }
+	100% { transform: scale(1); opacity: 1; }
+}
+.login-form {
+	animation: formFadeIn .4s ease-in;
+}
+@keyframes formFadeIn {
+	0% { opacity: 0; transform: translateY(10px); }
+	100% { opacity: 1; transform: translateY(0); }
+}
+.login-card:hover {
+	transform: translateY(-8px) scale(1.02);
+	box-shadow: 0 20px 50px rgba(20,20,40,0.15);
+	border-color: rgba(124,58,237,0.2);
+}
+.toggle-link {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 600;
+	transition: all .3s ease;
+}
+.toggle-link:hover {
+	text-decoration: underline;
+	color: var(--accent-dark, #6d28d9);
+}
+.login-header { animation: slideUp .8s ease .1s forwards; }
+.logo-img { max-width:80px; height:auto; animation: fadeIn 1s ease forwards; }
+.input-group .input:focus { box-shadow:0 0 0 3px rgba(124,58,237,.25); transition: box-shadow .3s ease; }
+
+/* Efecto de fondo animado */
+body {
+	animation: bgZoom 20s ease-in-out infinite;
+	transform-origin: center center;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
 }

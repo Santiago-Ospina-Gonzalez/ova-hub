@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -19,10 +20,10 @@ export class Ovacostos {
   margen: number = 0;
   resultado: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   calcular() {
-    const url = `https://8094-cs-faf8ce8e-4341-48c0-b18d-544a8d6640fc.cs-us-east1-vpcf.cloudshell.dev/api/costos-jni/calcular?cfijo=${this.cfijo}&cvariable=${this.cvariable}&cindirecto=${this.cindirecto}&unidades=${this.unidades}&margen=${this.margen}`;
+    const url = `http://localhost:8094/api/costos-jni/calcular?cfijo=${this.cfijo}&cvariable=${this.cvariable}&cindirecto=${this.cindirecto}&unidades=${this.unidades}&margen=${this.margen}`;
 
     this.http.get(url).subscribe({
       next: (data) => {
@@ -34,4 +35,6 @@ export class Ovacostos {
       },
     });
   }
+
+  goBack() { this.router.navigate(['/home-ova']); }
 }

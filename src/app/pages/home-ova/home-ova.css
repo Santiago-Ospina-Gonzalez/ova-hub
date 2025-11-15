@@ -1,0 +1,46 @@
+/* Animaciones y estilos adicionales para home */
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+@keyframes slideUp { from { transform:translateY(30px); opacity:0 } to { transform:translateY(0); opacity:1 } }
+@keyframes scaleIn { from { transform:scale(.9); opacity:0 } to { transform:scale(1); opacity:1 } }
+
+.fade-in { animation: fadeIn .9s ease forwards; }
+.fade-in-delay { animation: fadeIn 1s ease forwards; }
+.slide-up { animation: slideUp .8s ease forwards; }
+.scale-in { animation: scaleIn 1s ease forwards; }
+
+.logo-img { max-height:50px; width:auto; display:block; object-fit:contain; }
+.logo-glass { background:rgba(255,255,255,.9); backdrop-filter:blur(6px); padding:10px; border-radius:50%; width:70px; height:70px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(0,0,0,.12); }
+.home-fade { animation: homeFade 1.2s ease forwards; }
+.home-fade-stagger { animation: homeItem 1s ease forwards; }
+@keyframes homeFade { 0% { opacity:0; filter:blur(8px); transform:scale(.96) } 60% { filter:blur(2px) } 100% { opacity:1; filter:blur(0); transform:scale(1) } }
+@keyframes homeItem { 0% { opacity:0; transform:translateY(30px); } 70% { opacity:1; } 100% { transform:translateY(0); }
+}
+.ova-card.sample { position:relative; transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ova-card.sample:hover { transform: scale(1.15) translateY(-10px) !important; box-shadow: 0 20px 40px rgba(0,0,0,.25); filter: brightness(1.1); animation: none; }
+.ova-card.sample .ova-thumb { background:#fff; border-radius:10px; height:70px; box-shadow:0 6px 16px rgba(0,0,0,.08); display:flex; align-items:center; justify-content:center; font-size:40px; transition: transform .3s ease; }
+.ova-card.sample:hover .ova-thumb { transform: rotate(5deg); }
+.ova-card.sample.ova-analisis .ova-thumb { background:linear-gradient(135deg,#4f46e5,#7c3aed); color:#fff; }
+.ova-card.sample.ova-discretas .ova-thumb { background:linear-gradient(135deg,#0d9488,#14b8a6); color:#fff; }
+.ova-card.sample.ova-costos .ova-thumb { background:linear-gradient(135deg,#dc2626,#f97316); color:#fff; }
+.ova-card.sample.ova-analisis .ova-thumb::after { content:"∑"; }
+.ova-card.sample.ova-discretas .ova-thumb::after { content:"∪"; }
+.ova-card.sample.ova-costos .ova-thumb::after { content:"$"; font-weight:700; }
+
+@keyframes floatSlow { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-8px) } }
+.ova-card.sample { animation:floatSlow 6s ease-in-out infinite; }
+.ova-card.sample.ova-discretas { animation-delay:1s; }
+.ova-card.sample.ova-costos { animation-delay:2s; }
+
+.section-ovas .ova-card .ova-thumb { height:60px; }
+.section-ovas .ova-card:nth-child(1) .ova-thumb { background:linear-gradient(135deg,#0d9488,#14b8a6); }
+.section-ovas .ova-card:nth-child(1) .ova-thumb::after { content:"∩"; color:#fff; font-size:36px; }
+.section-ovas .ova-card:nth-child(2) .ova-thumb { background:linear-gradient(135deg,#dc2626,#f97316); }
+.section-ovas .ova-card:nth-child(2) .ova-thumb::after { content:"₿"; color:#fff; font-size:32px; }
+.section-ovas .ova-card:nth-child(3) .ova-thumb { background:linear-gradient(135deg,#4f46e5,#7c3aed); }
+.section-ovas .ova-card:nth-child(3) .ova-thumb::after { content:"√"; color:#fff; font-size:36px; }
+
+.ova-card { transition: transform .3s ease, box-shadow .3s ease; }
+.ova-card:hover { transform:translateY(-6px); box-shadow:0 12px 28px rgba(0,0,0,.08); }
+
+.hero { position:relative; overflow:hidden; }
+.hero::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 70% 30%, rgba(124,58,237,.15), transparent 60%); pointer-events:none; }

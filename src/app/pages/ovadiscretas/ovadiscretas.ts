@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,4 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './ovadiscretas.html',
   styleUrl: './ovadiscretas.css',
 })
-export class Ovadiscretas {}
+export class Ovadiscretas {
+  constructor(private router: Router) {}
+  goBack() { this.router.navigate(['/home-ova']); }
+}

@@ -1,12 +1,7 @@
-<header class="site-header" role="banner">
+<header class="site-header fade-in" role="banner">
   <div class="container header-inner">
     <a class="brand" routerLink="/home-ova" aria-label="Volver al inicio">
-      <span class="brand-logo">
-        <img
-          src="data:image/png;base64,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"
-          alt="Logo OVA"
-        />
-      </span>
+      <span class="brand-logo logo-glass"><img src="https://la.mathworks.com/academia/tah-portal/unidad-central-del-valle-del-cauca-31432630/_jcr_content/schoolLogo.adapt.full.medium.png/1742541962400.png" alt="Logo Plataforma" class="logo-img" /></span>
       <span class="brand-name">Plataforma</span>
     </a>
     <nav class="main-nav" role="navigation" aria-label="Menú principal">
@@ -19,8 +14,9 @@
   </div>
 </header>
 
-<main>
-  <section class="section hero single-hero">
+
+<main class="fade-in">
+  <section class="section hero single-hero fade-in">
     <div class="container">
       <h1>OVA: Costos y Presupuestos</h1>
       <p class="lead">
@@ -28,6 +24,9 @@
       </p>
     </div>
   </section>
+  <div class="ova-extra" aria-hidden="true">
+    <div class="ova-banner ova-costos-art"></div>
+  </div>
 
   <section class="section">
     <div class="container">
@@ -151,6 +150,7 @@
       </div>
     </div>
   </section>
+  <div class="back-final"><button class="back-btn" (click)="goBack()">← Volver</button></div>
 </main>
 
 <footer class="site-footer" role="contentinfo">
