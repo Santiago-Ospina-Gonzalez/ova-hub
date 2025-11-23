@@ -8,9 +8,9 @@
 		</a>
 		<nav class="main-nav" role="navigation" aria-label="Menú principal">
 			<ul>
-				<li><a routerLink="/home-ova#ovas">OVAs</a></li>
-				<li><a routerLink="/home-ova#about">Acerca</a></li>
-				<li><a class="cta" routerLink="/home-ova#contact">Contacto</a></li>
+				<li><a routerLink="/home-ova">Inicio</a></li>
+				<li><a href="javascript:void(0)" onclick="window.openAboutModal()">Acerca</a></li>
+				<li><a class="cta" href="javascript:void(0)" onclick="window.openContactModal()">Contacto</a></li>
 			</ul>
 		</nav>
 		<button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menú">&#9776;</button>
@@ -121,8 +121,9 @@
 			<p class="muted">Volver a <a routerLink="/home-ova">Inicio</a></p>
 		</div>
 		<nav aria-label="pie de página">
-			<a href="#">Privacidad</a>
-			<a href="#">Términos</a>
-		</nav>
+				<a routerLink="/home-ova">Inicio</a>
+				<a href="javascript:void(0)" onclick="window.openAboutModal()">Acerca</a>
+				<a href="javascript:void(0)" onclick="window.openContactModal()">Contacto</a>
+			</nav>
 	</div>
 </footer>

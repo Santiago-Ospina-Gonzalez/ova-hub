@@ -2,7 +2,7 @@
 @keyframes slideUp { from { transform:translateY(25px); opacity:0 } to { transform:translateY(0); opacity:1 } }
 .fade-in { animation: fadeIn .8s ease forwards; }
 .slide-up { animation: slideUp .8s ease forwards; }
-.logo-img { height:56px; width:auto; }
+.logo-img { max-height:50px; width:auto; display:block; object-fit:contain; }
 .logo-glass { background:rgba(255,255,255,.55); backdrop-filter:blur(6px); padding:4px 10px; border-radius:14px; }
 .back-final { text-align:center; margin:40px 0 10px; }
 .back-btn { background:#fff; border:1px solid var(--purple-300); color:var(--purple-700); padding:10px 20px; border-radius:24px; cursor:pointer; font:inherit; box-shadow:0 6px 20px rgba(0,0,0,.08); transition:.3s; }

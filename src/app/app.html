@@ -8,4 +8,43 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet />
-<router-outlet />
+
+<!-- ABOUT MODAL -->
+<div class="modal-overlay" *ngIf="aboutOpen()" onclick="window.closeAboutModal()">
+	<div class="modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+		<header>
+			<h3>Acerca del proyecto</h3>
+			<button class="modal-close" onclick="window.closeAboutModal()">×</button>
+		</header>
+		<div class="modal-body">
+			<p>Proyecto integrador de Programación - Ambiente Web II. Plataforma de OVAs (objetos virtuales de aprendizaje) con ejemplos prácticos sobre teoría de conjuntos, análisis numérico y costos.</p>
+			<p>Incluye simuladores y ejercicios para reforzar conceptos y conexión con microservicios.</p>
+		</div>
+		<footer>
+			<button class="btn btn-primary" onclick="window.closeAboutModal()">Cerrar</button>
+		</footer>
+	</div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" *ngIf="contactOpen()" onclick="window.closeContactModal()">
+	<div class="modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+		<header>
+			<h3>Contacto</h3>
+			<button class="modal-close" onclick="window.closeContactModal()">×</button>
+		</header>
+		<div class="modal-body">
+			<ul>
+				<li *ngFor="let p of contactList">
+					<strong>{{ p.name }}</strong><br />
+					Código: {{ p.code }}<br />
+					<a href="mailto:{{ p.email }}">{{ p.email }}</a>
+				</li>
+			</ul>
+		</div>
+		<footer>
+			<button class="btn btn-primary" onclick="window.closeContactModal()">Cerrar</button>
+		</footer>
+	</div>
+</div>
+
