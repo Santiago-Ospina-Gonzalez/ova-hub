@@ -5,20 +5,29 @@
 			<div class="login-logo">
 				<img src="https://la.mathworks.com/academia/tah-portal/unidad-central-del-valle-del-cauca-31432630/_jcr_content/schoolLogo.adapt.full.medium.png/1742541962400.png" alt="Logo Plataforma" class="logo-img" />
 			</div>
+
+			<!-- Mensaje inline -->
+			<div *ngIf="message" class="message-box" [ngClass]="{
+				'success': messageType === 'success',
+				'error': messageType === 'error',
+				'info': messageType === 'info'
+			}">
+				{{ message }}
+			</div>
 			<h1>Plataforma OVA</h1>
 				<p class="muted">{{ isRegisterMode ? 'Crea tu cuenta para continuar' : 'Ingresa tus credenciales para continuar' }}</p>
 			</div>
 			
 			<!-- Formulario de Login -->
-			<form *ngIf="!isRegisterMode" class="login-form sim-form" (ngSubmit)="goToHome($event)">
+			<form *ngIf="!isRegisterMode" class="login-form sim-form" (ngSubmit)="login($event)">
 				<div class="row">
 					<div class="col">
-						<label class="small">Usuario</label>
+						<label class="small">Email</label>
 						<div class="input-group">
 							<svg class="input-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
 							</svg>
-							  <input class="input" type="text" placeholder="Ingresa tu usuario" required [(ngModel)]="username" name="username">
+							  <input class="input" type="email" placeholder="Ingresa tu email" required [(ngModel)]="email" name="email">
 						</div>
 					</div>
 				</div>
@@ -35,7 +44,7 @@
 				</div>
 				<div class="row" style="margin-top:24px">
 					<div class="col">
-						<button class="btn btn-primary" style="width:100%" type="submit">Ingresar</button>
+						<button class="btn btn-primary" style="width:100%" type="button" (click)="login($event)">Ingresar</button>
 					</div>
 				</div>
 				<div class="row" style="margin-top:16px;text-align:center">
@@ -93,7 +102,7 @@
 				</div>
 				<div class="row" style="margin-top:24px">
 					<div class="col">
-						<button class="btn btn-primary" style="width:100%" type="submit">Registrarse</button>
+						<button class="btn btn-primary" style="width:100%" type="button" (click)="register($event)">Registrarse</button>
 					</div>
 				</div>
 				<div class="row" style="margin-top:16px;text-align:center">

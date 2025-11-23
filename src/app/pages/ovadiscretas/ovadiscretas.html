@@ -1,6 +1,6 @@
-<header class="site-header fade-in" role="banner">
+<header class="site-header fade-in" id="header" role="banner">
 	<div class="container header-inner">
-		<a class="brand" routerLink="/home-ova" aria-label="Volver al inicio">
+		<a class="brand" routerLink="/home-ova" aria-label="Inicio">
 			<span class="brand-logo logo-glass">
 				<img src="https://la.mathworks.com/academia/tah-portal/unidad-central-del-valle-del-cauca-31432630/_jcr_content/schoolLogo.adapt.full.medium.png/1742541962400.png" alt="Logo Plataforma" class="logo-img" />
 			</span>
@@ -8,13 +8,14 @@
 		</a>
 		<nav class="main-nav" role="navigation" aria-label="Menú principal">
 			<ul>
-				   <li><a routerLink="/home-ova">OVAs</a></li>
-				   <li><a routerLink="/home-ova#about">Acerca</a></li>
-				   <li><a class="cta" routerLink="/home-ova#contact">Contacto</a></li>
-						   </ul>
-					   </nav>
-				   </div>
-				</header>
+				<li><a routerLink="/home-ova#ovas">OVAs</a></li>
+				<li><a routerLink="/home-ova#about">Acerca</a></li>
+				<li><a class="cta" routerLink="/home-ova#contact">Contacto</a></li>
+			</ul>
+		</nav>
+		<button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menú">&#9776;</button>
+	</div>
+</header>
 
 				<main>
 </main>
@@ -38,37 +39,74 @@
 			<h3>¿Cómo funciona (breve)?</h3>
 			<p class="small muted">Cada operación tiene una regla: unión (todos los elementos de ambos conjuntos), intersección (elementos comunes), diferencia (elementos de A que no están en B).</p>
 			<div class="simulator-card">
-				<form class="sim-form" (ngSubmit)="$event.preventDefault()">
+				<form class="sim-form" (ngSubmit)="calcular()" #formulario="ngForm">
 					<div class="row">
 						<div class="col">
 							<label class="small">Conjunto A (coma-separado)</label>
-							<input class="input" type="text" placeholder="Ej: 1,2,3,5" />
+							<input 
+								class="input" 
+								type="text" 
+								placeholder="Ej: 1,2,3,5" 
+								[(ngModel)]="conjuntoA"
+								name="conjuntoA"
+								required
+							/>
 						</div>
 						<div class="col">
 							<label class="small">Conjunto B (coma-separado)</label>
-							<input class="input" type="text" placeholder="Ej: 2,4,5" />
+							<input 
+								class="input" 
+								type="text" 
+								placeholder="Ej: 2,4,5" 
+								[(ngModel)]="conjuntoB"
+								name="conjuntoB"
+								required
+							/>
 						</div>
 					</div>
 					<div class="row" style="margin-top:12px;align-items:center">
 						<div style="display:flex;gap:12px;align-items:center">
 							<label class="small">Operación</label>
-							<select class="input" style="min-width:160px">
-								<option>Unión</option>
-								<option>Intersección</option>
-								<option>Diferencia A - B</option>
-								<option>Diferencia B - A</option>
-								<option>Diferencia simétrica</option>
+							<select 
+								class="input" 
+								style="min-width:160px"
+								[(ngModel)]="operacion"
+								name="operacion"
+							>
+								<option value="union">Unión</option>
+								<option value="interseccion">Intersección</option>
+								<option value="diferencia">Diferencia A - B</option>
+								<option value="diferencia-ba">Diferencia B - A</option>
 							</select>
 						</div>
 						<div style="margin-left:auto;display:flex;gap:12px">
-							<button class="btn btn-primary" type="button">Calcular</button>
-							<button class="btn btn-outline" type="button">Reset</button>
+							<button class="btn btn-primary" type="submit">Calcular</button>
+							<button class="btn btn-outline" type="button" (click)="reset()">Reset</button>
 						</div>
 					</div>
-					<div class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:var(--purple-50);box-shadow:var(--shadow-1)">
+					
+					<div 
+						*ngIf="error" 
+						class="result" 
+						style="margin-top:18px;padding:14px;border-radius:10px;background:#fef2f2;border:1px solid #fca5a5;box-shadow:var(--shadow-1)"
+					>
+						<strong style="color:#dc2626">Error:</strong>
+						<div class="small" style="color:#dc2626;margin-top:4px">{{ error }}</div>
+					</div>
+
+					<div 
+						*ngIf="resultado" 
+						class="result" 
+						style="margin-top:18px;padding:14px;border-radius:10px;background:var(--purple-50);box-shadow:var(--shadow-1)"
+					>
 						<strong>Resultado:</strong>
-						<div class="small muted">{{'{'}}1,2,3,4,5{{'}'}}</div>
-						<div class="small" style="margin-top:8px">En esta versión la lógica no está conectada; interfaz lista para integrar.</div>
+						<div class="small muted" style="font-size:1.1rem;margin-top:8px">
+							{{'{'}}
+							<span *ngFor="let num of resultado; let i = index">
+								{{ num }}<span *ngIf="i < resultado.length - 1">, </span>
+							</span>
+							{{'}'}}
+						</div>
 					</div>
 				</form>
 			</div>

@@ -23,7 +23,7 @@ export class Ovacostos {
   constructor(private http: HttpClient, private router: Router) {}
 
   calcular() {
-    const url = `http://localhost:8094/api/costos-jni/calcular?cfijo=${this.cfijo}&cvariable=${this.cvariable}&cindirecto=${this.cindirecto}&unidades=${this.unidades}&margen=${this.margen}`;
+    const url = `   `;
 
     this.http.get(url).subscribe({
       next: (data) => {

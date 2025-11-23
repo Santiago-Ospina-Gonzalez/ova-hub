@@ -59,6 +59,13 @@ img{max-width:100%;height:auto;display:block}
 	object-fit:cover;
 	border-radius:8px;
 }
+/* Logo: tamaño consistente en todas las páginas */
+.logo-img{
+    height:56px;
+    width:auto;
+    display:block;
+    object-fit:contain;
+}
 .brand-name{font-weight:600}
 .main-nav ul{display:flex;gap:18px;list-style:none;padding:0;margin:0}
 .main-nav a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:8px;transition:all .18s ease}
