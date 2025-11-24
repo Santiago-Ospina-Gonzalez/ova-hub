@@ -41,38 +41,45 @@
 			<h3>¿Cómo funciona (breve)?</h3>
 			<p class="small muted">Se parte de un intervalo [a,b] que contenga la raíz (bisección) o de una aproximación inicial (Newton) y se itera hasta alcanzar la precisión deseada.</p>
 			<div class="simulator-card">
-				<form class="sim-form" (ngSubmit)="$event.preventDefault()">
+				<form class="sim-form" (ngSubmit)="calcular()">
 					<div class="row">
 						<div class="col">
 							<label class="small">Extremo a</label>
-							<input class="input" type="number" step="any" placeholder="Ej: -1.5" />
+							<input class="input" type="number" step="any" placeholder="Ej: -1.5" [(ngModel)]="x1" name="x1" />
 						</div>
 						<div class="col">
 							<label class="small">Extremo b</label>
-							<input class="input" type="number" step="any" placeholder="Ej: 2.0" />
+							<input class="input" type="number" step="any" placeholder="Ej: 2.0" [(ngModel)]="x2" name="x2" />
 						</div>
 						<div class="col">
-							<label class="small">Precisión (tolerancia)</label>
-							<input class="input" type="number" step="any" placeholder="Ej: 0.0001" />
+							<label class="small">Función</label>
+							<input class="input" type="text" placeholder="Ej: (x^2)cos(x)" [(ngModel)]="funcion" name="funcion" />
 						</div>
 					</div>
 					<div class="row" style="margin-top:12px;align-items:center">
 						<div style="display:flex;gap:12px;align-items:center">
 							<label class="small">Método</label>
-							<select class="input" style="min-width:160px">
-								<option>Bisección</option>
-								<option>Newton-Raphson</option>
+							<select class="input" style="min-width:160px" [(ngModel)]="metodo" name="metodo">
+								<option value="Bisección">Bisección</option>
 							</select>
 						</div>
 						<div style="margin-left:auto;display:flex;gap:12px">
-							<button class="btn btn-primary" type="button">Calcular</button>
-							<button class="btn btn-outline" type="button">Reset</button>
+							<button class="btn btn-primary" type="submit">Calcular</button>
+							<button class="btn btn-outline" type="button" (click)="reset()">Reset</button>
 						</div>
 					</div>
-					<div class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:var(--purple-50);box-shadow:var(--shadow-1)">
+
+					<div *ngIf="error" class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:#fef2f2;border:1px solid #fca5a5;box-shadow:var(--shadow-1)">
+						<strong style="color:#dc2626">Error:</strong>
+						<div class="small" style="color:#dc2626;margin-top:4px">{{ error }}</div>
+					</div>
+
+					<div *ngIf="resultado" class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:var(--purple-50);box-shadow:var(--shadow-1)">
 						<strong>Resultado:</strong>
-						<div class="small muted">x ≈ <span class="fake-result">1.2345</span> — iteraciones: <span class="fake-result">12</span></div>
-						<div class="small" style="margin-top:8px">En esta versión la lógica no está conectada; interfaz lista para integrar.</div>
+						<div class="small muted" style="margin-top:8px">
+							Raíz aproximada: {{ resultado[0] }}
+						</div>
+						<div class="small muted" style="margin-top:6px">Iteraciones: {{ resultado[1] }}</div>
 					</div>
 				</form>
 			</div>
