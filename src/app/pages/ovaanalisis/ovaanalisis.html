@@ -69,9 +69,11 @@
 						</div>
 					</div>
 
-					<div *ngIf="error" class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:#fef2f2;border:1px solid #fca5a5;box-shadow:var(--shadow-1)">
-						<strong style="color:#dc2626">Error:</strong>
-						<div class="small" style="color:#dc2626;margin-top:4px">{{ error }}</div>
+					<div *ngIf="errorCode !== null" class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:#fef2f2;border:1px solid #fca5a5;box-shadow:var(--shadow-1)">
+						<strong style="color:#dc2626">{{ errorTitle }}</strong>
+						<div class="small" style="color:#dc2626;margin-top:6px">{{ errorDescription }}</div>
+						<div class="small" style="color:#6b7280;margin-top:8px">{{ errorHelp }}</div>
+						<div class="small" style="color:#6b7280;margin-top:8px;font-weight:600">Código: {{ errorCode }}</div>
 					</div>
 
 					<div *ngIf="resultado" class="result" style="margin-top:18px;padding:14px;border-radius:10px;background:var(--purple-50);box-shadow:var(--shadow-1)">

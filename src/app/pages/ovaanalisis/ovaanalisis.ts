@@ -38,6 +38,40 @@ export class Ovaanalisis implements OnInit, OnDestroy {
 
   resultado: any = null;
   error: string = '';
+  errorCode: number | null = null;
+  errorTitle: string = '';
+  errorDescription: string = '';
+  errorHelp: string = '';
+
+  // Error mappings (codes -> messages)
+  private ERROR_TITLES: Record<number, string> = {
+    0: 'Éxito - Evaluación completada correctamente',
+    1: 'Error de análisis - Sintaxis incorrecta en la expresión',
+    2: 'Error de evaluación matemática - Operación no válida',
+    3: 'Múltiples variables detectadas - Solo se permite una variable',
+    4: 'Error de memoria - No se pudo asignar memoria',
+    5: 'Error bisección - Ambos extremos del intervalo tienen el mismo signo',
+    6: 'Error bisección - El extremo superior no es mayor que el inferior'
+  };
+
+  private ERROR_DESCRIPTIONS: Record<number, string> = {
+    0: 'La expresión se evaluó correctamente',
+    1: 'Revise la sintaxis de la expresión matemática',
+    2: 'Operación matemática no válida para los valores dados',
+    3: 'Use solo una variable (x, y, z, etc.) en la expresión',
+    4: 'Error interno del sistema',
+    5: 'No hay cambio de signo en los extremos; el método de bisección no aplica',
+    6: 'El segundo parámetro debe ser mayor que el primero para aplicar bisección'
+  };
+
+  private ERROR_HELP: Record<number, string> = {
+    1: 'Verifique paréntesis, operadores y funciones válidas',
+    2: 'Evite divisiones por cero, raíces negativas, logaritmos no positivos',
+    3: 'Ejemplos válidos: "x^2", "2*x+1", "sin(x)" - Ejemplo inválido: "x+y"',
+    4: 'Reinicie la aplicación o reduzca la complejidad de la expresión',
+    5: 'Asegúrese de que f(a) y f(b) tengan signos opuestos antes de llamar a la bisección',
+    6: 'Intercambie los parámetros o corrija el orden: use (a,b) con b > a'
+  };
 
   calcular() {
     this.error = '';
@@ -57,7 +91,29 @@ export class Ovaanalisis implements OnInit, OnDestroy {
 
     this.http.post(url, body).subscribe({
       next: (data: any) => {
-        this.resultado = data;
+        // Expecting an array [raiz, iteraciones, codigo]
+        this.resultado = null;
+        this.error = '';
+        this.errorCode = null;
+        this.errorTitle = '';
+        this.errorDescription = '';
+        this.errorHelp = '';
+
+        if (Array.isArray(data) && data.length >= 3) {
+          const code = Number(data[2]);
+          if (code === 0) {
+            this.resultado = data;
+          } else {
+            this.errorCode = isNaN(code) ? null : code;
+            this.errorTitle = this.ERROR_TITLES[code] || ('Error código: ' + code);
+            this.errorDescription = this.ERROR_DESCRIPTIONS[code] || '';
+            this.errorHelp = this.ERROR_HELP[code] || '';
+            this.error = this.errorTitle;
+          }
+        } else {
+          // Unknown response format
+          this.error = 'Respuesta inesperada del servicio.';
+        }
       },
       error: (err) => {
         console.error('Error al calcular bisección:', err);
